@@ -2,10 +2,20 @@
   "name": "blokta-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "nodemon -r dotenv/config -r source-map-support/register dist/index.js",
+    "build": "tsc -b -v",
+    "watch": "tsc -b -w -v",
+    "start": "node dist/index.js"
   },
   "author": "Chris Woodle",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^11.12.2",
+    "dotenv": "^7.0.0",
+    "nodemon": "^1.18.10",
+    "source-map-support": "^0.5.11",
+    "typescript": "^3.4.1"
+  }
 }
