@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say>This is an important message for erryone.</Say>
+	<Play>https://woodle.ngrok.io/play.mp3</Play>
+</Response>
