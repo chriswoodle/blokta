@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class='content-inside'>
-                <router-view />
+                <router-view :key="$route.fullPath"/>
             </div>
         </div>
         <footer class="footer">
@@ -94,7 +94,7 @@ export default class App extends Vue {
         await this.isAuthenticated();
 
         // Navigate back to home
-        this.$router.push({ path: '/' });
+        this.$router.replace('/');
     }
 }
 </script>
