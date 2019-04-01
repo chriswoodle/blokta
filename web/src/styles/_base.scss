@@ -1,0 +1,72 @@
+$default-easing: cubic-bezier(0.25, 0.5, 0.5, 0.9);
+$golden-ratio: 1.61803398875;
+$primary-color: #527DD0;
+html {
+    box-sizing: border-box;
+    background-color: #e4e4e4;
+    height: 100%;
+    color: #323232;
+    font-family: 'Untitled Sans', 'sans-serif';
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    border: 0;
+}
+
+.user-select-all {
+    user-select: all;
+}
+
+.user-select-none {
+    user-select: none;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+input.password {
+    text-security: disc;
+    -webkit-text-security: disc;
+    -mox-text-security: disc;
+}
+
+canvas,
+img,
+video {
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+p {
+    margin-bottom: 5px;
+}
+
+.md {
+    li{ 
+        list-style: circle;
+        margin-bottom: 5px;
+        margin-left: 15px;
+    }
+}
