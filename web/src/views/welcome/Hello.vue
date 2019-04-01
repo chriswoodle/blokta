@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        <h1>Hello, welcome to Blokta!</h1>
+        <h1>Hello, welcome back to Blokta!</h1>
         <div v-if='!authenticated'>
             <h2>Please login in.</h2>
             <button @click='login'>Login</button>

@@ -7,8 +7,8 @@
                 </div>
                 <div class='account'>
                     <div class='target'>
-                        <span v-if='user'>{{username}}</span>
-                        <img v-bind:src='`//www.gravatar.com/avatar/12345?d=identicon`' />
+                        <span v-if='username'>{{username}}</span>
+                        <img v-bind:src='`//www.gravatar.com/avatar/${emailHash}?d=identicon`' />
                     </div>
                     <div class='menu' menu>
                         <a v-if='!authenticated' @click='login'>
@@ -40,6 +40,8 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import * as okta from '@okta/okta-vue';
 
+import md5 from 'md5';
+
 interface User {
     email: string;
     email_verified: boolean;
@@ -60,17 +62,29 @@ interface User {
 })
 export default class App extends Vue {
     authenticated = false;
-    user: User | {} = {};
+    user: any = {};
     username = '';
+    get emailHash() {
+        if (this.user && this.user.email)
+            return md5(this.user.email);
+        else
+            return '';
+    }
 
-    created() {
-        this.isAuthenticated().then(() => {
-            if (this.authenticated === true) {
-                this.$auth.getUser().then((result: User | undefined) => {
+    mounted() {
+        this.isAuthenticated();
+        console.log('mounted');
+        this.$auth.isAuthenticated().then((authenticated) => {
+            console.log(authenticated);
+            if (authenticated === true) {
+                this.$auth.getUser().then((result: User) => {
                     console.log(result);
                     this.user = result || {};
-                    if (result)
+                    if (result) {
                         this.username = result.name;
+                        console.log(result.name);
+                    }
+                    console.log(this.username);
                     console.log(this.user);
                     this.$forceUpdate();
                 }).catch(error => {
@@ -90,11 +104,13 @@ export default class App extends Vue {
     }
 
     async logout() {
+        console.log('logout');
         await this.$auth.logout();
         await this.isAuthenticated();
 
         // Navigate back to home
         this.$router.replace('/');
+        window.location.reload();
     }
 }
 </script>
