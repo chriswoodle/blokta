@@ -1,3 +1,4 @@
+import * as path from 'path';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
@@ -15,7 +16,9 @@ app.use(morgan(':method :url :status - :response-time ms'));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.use(express.static(path.resolve(__dirname, '../../web/dist')));
+
+app.get('/status', (req, res) => res.send('Hello World!'));
 
 app.post('/subscribe', (req, res) => {
     const data = req.body;
@@ -24,9 +27,11 @@ app.post('/subscribe', (req, res) => {
 
     log(`Sending sms to ${toNumber}`);
 
-    twilio.sms('You are now subscribed!', toNumber).then(result => {
+    twilio.sms('You are now subscribed to a Blokta writer!', toNumber).then(result => {
         res.send({ complete: true });
     });
 });
+
+app.use('**', express.static(path.resolve(__dirname, '../../web/dist')));
 
 app.listen(port, () => log(`Example app listening on port ${port}!`));

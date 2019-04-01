@@ -7,7 +7,7 @@
                 </div>
                 <div class='account'>
                     <div class='target'>
-                        <span v-if='user'>{{user.name}}</span>
+                        <span v-if='user'>{{username}}</span>
                         <img v-bind:src='`//www.gravatar.com/avatar/12345?d=identicon`' />
                     </div>
                     <div class='menu' menu>
@@ -61,6 +61,7 @@ interface User {
 export default class App extends Vue {
     authenticated = false;
     user: User | {} = {};
+    username = '';
 
     created() {
         this.isAuthenticated().then(() => {
@@ -68,6 +69,8 @@ export default class App extends Vue {
                 this.$auth.getUser().then((result: User | undefined) => {
                     console.log(result);
                     this.user = result || {};
+                    if (result)
+                        this.username = result.name;
                     console.log(this.user);
                     this.$forceUpdate();
                 }).catch(error => {

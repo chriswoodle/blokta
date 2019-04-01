@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "An Okta-Twillio-Git-Blog platform",
   "private": true,
+  "scripts": {
+    "start": "node -r dotenv/config -r source-map-support/register server/dist/index.js",
+    "postinstall": "yarn --cwd ./web && yarn --cwd ./server",
+    "build": "cd ./web && yarn build && cd ../server && yarn build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chriswoodle/blokta.git"
@@ -12,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/chriswoodle/blokta/issues"
   },
-  "homepage": "https://github.com/chriswoodle/blokta#readme"
+  "homepage": "https://github.com/chriswoodle/blokta#readme",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "source-map-support": "^0.5.11"
+  }
 }
