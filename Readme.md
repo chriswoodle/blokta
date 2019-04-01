@@ -8,6 +8,6 @@ A git backed blog platform.
 
 * Git
 * Okta
-* Twillio
+* Twilio
 * MongoDB
 * Vue
